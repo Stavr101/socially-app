@@ -2,9 +2,12 @@ import Link from "next/link";
 import React from "react";
 import DesktopNavbar from "./DesktopNavbar";
 
+import MobileNavbar from "./MobileNavbar";
+import { ModeToggle } from "./ModeToggle";
+
 function Navbar() {
   return (
-    <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+    <nav className="sticky top-0 z-30 w-full border-b bg-background/95">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -16,7 +19,7 @@ function Navbar() {
             </Link>
           </div>
           <DesktopNavbar />
-          {/* <MobileNavbar /> */}
+          <MobileNavbar />
         </div>
       </div>
     </nav>
