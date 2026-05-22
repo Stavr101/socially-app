@@ -48,14 +48,17 @@ function MobileNavbar() {
             <MenuIcon className="w-5 h-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[300px] z-[100]">
+        <SheetContent
+          side="right"
+          className="w-[300px] z-[100] bg-background text-foreground"
+        >
           <SheetHeader>
             <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
           <nav className="flex flex-col space-y-4 mt-6">
             <Button
               variant={"ghost"}
-              className="flex items-center gap-3 justify-start"
+              className="flex items-center gap-3 justify-start w-full"
               asChild
             >
               <Link href={"/"}>
@@ -67,7 +70,7 @@ function MobileNavbar() {
               <>
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-3 justify-start"
+                  className="flex items-center gap-3 justify-start w-full"
                   asChild
                 >
                   <Link href="/notifications">
@@ -77,7 +80,7 @@ function MobileNavbar() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-3 justify-start"
+                  className="flex items-center gap-3 justify-start w-full "
                   asChild
                 >
                   <Link href="/profile">

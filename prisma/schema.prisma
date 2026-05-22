@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+ 
+datasource db {
+  provider = "postgresql"
+  
+  url = env("DATABASE_URL")
+  
+
+}
+
+model User {
+  id    String     @id @default(uuid())
+  email String  @unique
+  username  String @unique
+  clerkId String @unique
+  name String?
+  bio String?
+  location String?
+  website String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relation
+
+  posts Post[]
+  comments Comment[]
+  likes Like[]
+
+  followers Follows[]  @relation("following")
+  following Follows[]  @relation("follower")
+
+  notifications Notification[] @relation("userNotification")
+  notificationCreated Notification[] @relation("notificationCreator")
+
+}
+ model Post {
+id String @id @default(uuid())
+authorId String
+content String?
+image String?
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+
+author User  @relation(fields: [authorId], references: [id], onDelete: Cascade )
+comments Comment[]
+likes Like[]
+notification Notification[]
+
+ }
+
+ model Comment { 
+  id String @id @default(uuid())
+  content String
+  authorId String
+  postId String
+  createdAt DateTime @default(now())
+
+  // relation
+author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+post Post @relation(fields: [postId],references: [id], onDelete: Cascade)
+
+@@index([authorId,postId]) //composite index for faster queries  
+
+  }
+
+  model Like{
+  id String @id @default(uuid())
+  postId String
+  userId String
+  createdAt DateTime @default(now() )
+
+// relation
+user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, postId])
+  }
+  model Follows{
+
+  }
+
+  model Notification{
+
+  }
